@@ -17,6 +17,7 @@ spec:
           - agent
         env:
           - name: DRONE_SERVER
+            # Using kube-dns
             value: "ws://drone-server:8000/ws/broker"
           - name: DRONE_SECRET
             valueFrom:
