@@ -1,0 +1,26 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: droneagent-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: drone-agent
+    spec:
+      containers:
+      - name: drone-agent
+        image: drone/drone:0.7
+        command:
+          - /drone
+          - agent
+        env:
+          - name: DRONE_SERVER
+            value: "ws://drone-server:8000/ws/broker"
+          - name: DRONE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: drone
+                key: DRONE_SECRET
+
