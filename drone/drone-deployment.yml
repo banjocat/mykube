@@ -19,9 +19,8 @@ spec:
             value: "true"
           - name: DRONE_HOST
             value: "${DRONE_HOST}"
-          # Needs to be at least sqlite db eventually
-          - name: DATABASE_CONFIG
-            value: ":memory:"
+          - name: DRONE_ADMIN
+            value: banjocat
           - name: DRONE_GITHUB
             value: "true"
           - name: DRONE_SECRET
@@ -39,5 +38,14 @@ spec:
               secretKeyRef:
                 name: drone
                 key: GITHUB_SECRET
+        volumeMounts:
+          - mountPath: /var/lib/drone
+            name: sqlite3
+      volumes:
+        - name: sqlite3
+          # This should be hosted with EBS, GCE or NFS
+          hostPath:
+            path: /sqlite3
+
 
 
