@@ -19,6 +19,7 @@ spec:
             value: "true"
           - name: DRONE_HOST
             value: "${DRONE_HOST}"
+          # Needs to be at least sqlite db eventually
           - name: DATABASE_CONFIG
             value: ":memory:"
           - name: DRONE_GITHUB
