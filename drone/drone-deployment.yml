@@ -1,0 +1,42 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: drone-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: drone-server
+    spec:
+      containers:
+      - name: drone-server
+        image: drone/drone:0.7
+        ports:
+        - containerPort: 8000
+        env:
+          - name: DRONE_OPEN
+            value: "true"
+          - name: DRONE_HOST
+            value: "${DRONE_HOST}"
+          - name: DATABASE_CONFIG
+            value: ":memory:"
+          - name: DRONE_GITHUB
+            value: "true"
+          - name: DRONE_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: drone
+                key: DRONE_SECRET
+          - name: DRONE_GITHUB_CLIENT
+            valueFrom:
+              secretKeyRef:
+                name: drone
+                key: GITHUB_CLIENT
+          - name: DRONE_GITHUB_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: drone
+                key: GITHUB_SECRET
+
+
