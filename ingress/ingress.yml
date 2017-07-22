@@ -10,6 +10,7 @@ spec:
     - hosts:
       - jackmuratore.com
       - www.jackmuratore.com
+      - drone.jackmuratore.com
       secretName: jackmuratore-tls
   rules:
   - host: jackmuratore.com
@@ -23,4 +24,10 @@ spec:
       paths:
       - backend:
           serviceName: jackmuratore
+          servicePort: 80
+  - host: drone.jackmuratore.com
+    http:
+      paths:
+      - backend:
+          serviceName: drone-server
           servicePort: 80

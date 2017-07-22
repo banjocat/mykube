@@ -14,6 +14,10 @@ spec:
       - image: gcr.io/google_containers/nginx-ingress-controller:0.8.3
         name: ingress-nginx
         imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: ".1"
+            memory: 100Mi
         ports:
           - name: http
             containerPort: 80

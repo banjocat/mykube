@@ -35,6 +35,8 @@ spec:
             value: "${DRONE_HOST}"
           - name: DRONE_ADMIN
             value: banjocat
+          - name: DRONE_ORGS
+            value: pizza
           - name: DRONE_GITHUB
             value: "true"
           - name: DRONE_SECRET
