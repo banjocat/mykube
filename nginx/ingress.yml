@@ -10,7 +10,7 @@ spec:
       - backend:
           serviceName: jackmuratore
           servicePort: 80
-  - host: "*.jackmuratore.com"
+  - host: www.jackmuratore.com
     http:
       paths:
       - backend:
