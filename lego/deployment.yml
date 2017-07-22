@@ -13,6 +13,13 @@ spec:
       - name: kube-lego
         image: jetstack/kube-lego:0.1.5
         imagePullPolicy: Always
+        resources:
+          limits:
+            cpu: ".05"
+            memory: 200Mi
+          requests:
+            cpu: ".05"
+            memory: 100Mi
         ports:
         - containerPort: 8080
         env:
