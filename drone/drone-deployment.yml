@@ -44,8 +44,7 @@ spec:
       volumes:
         - name: sqlite3
           # This should be hosted with EBS, GCE or NFS
-          hostPath:
-            path: /sqlite3
+          emptyDir: {}
 
 
 
