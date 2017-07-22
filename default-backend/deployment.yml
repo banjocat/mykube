@@ -24,6 +24,13 @@ spec:
       containers:
       - name: default-http-backend
         image: gcr.io/google_containers/defaultbackend:1.0
+        resources:
+          limits:
+            cpu: ".05"
+            memory: 200Mi
+          requests:
+            cpu: ".01"
+            memory: 100Mi
         livenessProbe:
           httpGet:
             path: /healthz
