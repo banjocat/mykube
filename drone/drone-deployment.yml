@@ -21,6 +21,13 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 30
           timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: ".3"
+            memory: 300Mi
+          requests:
+            cpu: ".1"
+            memory: 100Mi
         env:
           - name: DRONE_OPEN
             value: "true"
