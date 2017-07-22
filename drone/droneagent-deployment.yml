@@ -12,6 +12,10 @@ spec:
       containers:
       - name: drone-agent
         image: drone/drone:0.7
+        resources:
+          requests:
+            cpu: ".025"
+            memory: 100Mi
         command:
           - /drone
           - agent
