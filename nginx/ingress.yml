@@ -4,13 +4,13 @@ metadata:
   name: my-ingress
 spec:
   rules:
-  - host: www.jackmuratore.com
+  - host: jackmuratore.com
     http:
       paths:
       - backend:
           serviceName: jackmuratore
           servicePort: 80
-  - host: jackmuratore.com
+  - host: "*.jackmuratore.com"
     http:
       paths:
       - backend:
