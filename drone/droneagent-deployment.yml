@@ -22,7 +22,7 @@ spec:
         env:
           - name: DRONE_SERVER
             # Using kube-dns
-            value: "ws://drone-server:8000/ws/broker"
+            value: "ws://drone-server:80/ws/broker"
           - name: DRONE_SECRET
             valueFrom:
               secretKeyRef:
