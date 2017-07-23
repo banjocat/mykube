@@ -1,0 +1,9 @@
+name: ingress-with-https
+version: 0.1.0
+description: Basic ingress with https setup
+keywords:
+  - https
+  - letsencrypt
+  - nginx
+  - http
+email: jackmuratore@gmail.com

@@ -12,6 +12,9 @@ spec:
       containers:
       - name: drone-agent
         image: drone/drone:0.7
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
         resources:
           requests:
             cpu: ".025"
@@ -23,9 +26,20 @@ spec:
           - name: DRONE_SERVER
             # Using kube-dns
             value: "ws://drone-server:80/ws/broker"
+          - name: DOCKER_API_VERSION
+            value: "1.23"
           - name: DRONE_SECRET
             valueFrom:
               secretKeyRef:
                 name: drone
                 key: DRONE_SECRET
+        volumeMounts:
+          - mountPath: /var/run/docker.sock
+            name: docker
+            readOnly: true
+      volumes:
+        - name: docker
+          # This should be hosted with EBS, GCE or NFS
+          hostPath:
+            path: /var/run/docker.sock
 
