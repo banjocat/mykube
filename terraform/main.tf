@@ -39,6 +39,16 @@ resource "digitalocean_firewall" "kube" {
             port_range = "22"
             source_addresses = ["0.0.0.0/0", "::/0"]
         },
+        {
+            protocol = "tcp"
+            port_range = "all"
+            source_addresses = ["${concat(digitalocean_droplet.nodes.*.ipv4_address, digitalocean_droplet.master.*.ipv4_address)}"]
+        },
+        {
+            protocol = "tcp"
+            port_range = "all"
+            source_addresses = ["${digitalocean_floating_ip.master_ip.ip_address}", "${digitalocean_floating_ip.node_ip.ip_address}"]
+        },
     ]
 
     outbound_rule {
