@@ -1,10 +1,13 @@
+variable ssh_key {
+    default = ["ce:1b:52:47:94:e7:f5:43:dc:a7:6e:ac:5d:3e:d2:6d"]
+}
 
 resource "digitalocean_droplet" "master" {
     image = "ubuntu-16-04-x64"
     name = "kube-master-${count.index + 1}"
     region = "nyc1"
     size = "2gb"
-    ssh_keys = ["ce:1b:52:47:94:e7:f5:43:dc:a7:6e:ac:5d:3e:d2:6d"]
+    ssh_keys = ["${var.ssh_key}"]
     count = 1
     user_data = "${file("./bootstrap.sh")}"
 }
@@ -13,7 +16,7 @@ resource "digitalocean_droplet" "nodes" {
     name = "kube-node-${count.index + 1}"
     region = "nyc1"
     size = "1gb"
-    ssh_keys = ["ce:1b:52:47:94:e7:f5:43:dc:a7:6e:ac:5d:3e:d2:6d"]
+    ssh_keys = ["${var.ssh_key}"]
     count = 1
     user_data = "${file("./bootstrap.sh")}"
 }
