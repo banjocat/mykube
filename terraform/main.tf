@@ -45,12 +45,8 @@ resource "digitalocean_firewall" "kube" {
         {
             protocol = "tcp"
             port_range = "all"
-            source_addresses = ["${concat(digitalocean_droplet.nodes.*.ipv4_address, digitalocean_droplet.master.*.ipv4_address)}"]
-        },
-        {
-            protocol = "tcp"
-            port_range = "all"
-            source_addresses = ["${digitalocean_floating_ip.master_ip.ip_address}", "${digitalocean_floating_ip.node_ip.ip_address}"]
+            source_addresses = ["${concat(digitalocean_droplet.nodes.*.ipv4_address, digitalocean_droplet.master.*.ipv4_address)}",
+            "${digitalocean_floating_ip.master_ip.ip_address}", "${digitalocean_floating_ip.node_ip.ip_address}"]
         },
     ]
 
