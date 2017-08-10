@@ -1,8 +1,3 @@
-variable "do_token" {}
-
-provider "digitalocean" {
-    token = "${var.do_token}"
-}
 
 resource "digitalocean_droplet" "master" {
     image = "ubuntu-16-04-x64"
@@ -31,6 +26,26 @@ resource "digitalocean_floating_ip" "master_ip" {
 resource "digitalocean_floating_ip" "node_ip" {
     droplet_id = "${digitalocean_droplet.nodes.0.id}"
     region = "${digitalocean_droplet.master.region}"
+}
+
+
+resource "digitalocean_firewall" "kube" {
+    name = "kube"
+
+    droplet_ids = ["${concat(digitalocean_droplet.nodes.*.id, digitalocean_droplet.master.*.id)}"]
+    inbound_rule = [
+        {
+            protocol = "tcp"
+            port_range = "22"
+            source_addresses = ["0.0.0.0/0", "::/0"]
+        },
+    ]
+
+    outbound_rule {
+        protocol = "tcp"
+        port_range = "all"
+        destination_addresses = ["0.0.0.0/0", "::/0"]
+    }
 }
 
 output "master" {
